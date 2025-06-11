@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/index.js';
-import admin from '../src/firebase.js';
+import admin from '../firebase.js';
 
 describe('API Auth', () => {
   it('deve responder com erro se faltar email ou senha no login', async () => {
