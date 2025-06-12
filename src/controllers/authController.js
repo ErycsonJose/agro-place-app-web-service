@@ -19,11 +19,11 @@ export const login = async (req, res) => {
         const valid = await bcrypt.compare(password, user.senha);
         if(!valid) return res.status(401).json({error: 'Credenciais inválidas'});
         const token = jwt.sign(
-          { id: snapshot.docs[0].id, email: user.email, tipoUsuario: user.tipoUsuario },
+          { id: userDoc.id, email: user.email, tipoUsuario: user.tipoUsuario },
           SECRET,
           { expiresIn: '1d' }
         );
-        res.json({ token, user });
+        res.json({ token, user:{id: userDoc.id, ...user} });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao fazer login.' });
     }
